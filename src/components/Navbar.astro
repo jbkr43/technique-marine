@@ -6,7 +6,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 <header class="navbar">
   <div class="navbar__inner">
     <a href="/" class="navbar__logo">
-      <img src={`${base}logos/logo-badge.png`} alt="Technique Marine" height="64" />
+      <img src={`${base}logos/logo-badge.png`} alt="Technique Marine" />
     </a>
     <nav class="navbar__links">
       <a href="#services">Services</a>
@@ -33,7 +33,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   .navbar {
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1001;
     background-color: var(--color-navy);
     border-bottom: 2px solid var(--color-gold);
   }
@@ -145,11 +145,13 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
   @media (max-width: 768px) {
     .navbar__inner {
-      height: 56px;
+      height: 44px;
+      padding: 0 16px;
+      gap: 0;
     }
 
     .navbar__logo img {
-      height: 48px;
+      height: 32px;
     }
 
     .navbar__links,
@@ -161,7 +163,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       display: flex;
     }
 
-    .navbar__mobile {
+    .navbar__mobile.open {
       display: flex;
     }
   }
@@ -172,10 +174,28 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   const mobile = document.querySelector('.navbar__mobile');
 
   hamburger?.addEventListener('click', () => {
-    const isOpen = mobile?.classList.toggle('open');
-    hamburger.classList.toggle('open');
-    hamburger.setAttribute('aria-expanded', String(isOpen));
-    hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
-    mobile?.setAttribute('aria-hidden', String(!isOpen));
+    const isOpen = mobile?.classList.contains('open');
+    if (isOpen) {
+      mobile.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.setAttribute('aria-label', 'Open menu');
+      mobile.setAttribute('aria-hidden', 'true');
+      mobile.addEventListener('transitionend', function handler() {
+        mobile.style.display = 'none';
+        mobile.removeEventListener('transitionend', handler);
+      });
+    } else {
+      mobile.style.display = 'flex';
+      hamburger.setAttribute('aria-expanded', 'true');
+      hamburger.setAttribute('aria-label', 'Close menu');
+      mobile.setAttribute('aria-hidden', 'false');
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          mobile.classList.add('open');
+          hamburger.classList.add('open');
+        });
+      });
+    }
   });
 </script>
