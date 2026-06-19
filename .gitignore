@@ -5,7 +5,8 @@ dist/
 
 # dependencies
 node_modules/
-
+.opencode/
+.vscode/
 # logs
 npm-debug.log*
 yarn-debug.log*
@@ -16,6 +17,8 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
+PRODUCT.md
+DESIGN.md
 
 # macOS-specific files
 .DS_Store
