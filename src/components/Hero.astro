@@ -3,20 +3,23 @@ import site from '../content/site.json';
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
-<section class="hero" id="hero">
+<section class="hero" id="hero" aria-labelledby="hero-heading">
   <div class="hero__inner">
     <div class="hero__text">
-      <p class="hero__tagline">{site.serviceArea}</p>
-      <h1 class="hero__headline">{site.hero.headline}</h1>
-      <p class="hero__sub">{site.tagline}</p>
-      <p class="hero__one-call">{site.hero.subheadline}</p>
-      <div class="hero__actions">
+      <p class="hero__tagline hero-entrance hero-entrance--1" style="--drift-x: -15px">{site.serviceArea}</p>
+      <h1 id="hero-heading" class="hero__headline hero-entrance hero-entrance--2" style="--drift-x: 20px">{site.hero.headline}</h1>
+      <p class="hero__sub hero-entrance hero-entrance--3" style="--drift-x: -12px">{site.tagline}</p>
+      <p class="hero__one-call hero-entrance hero-entrance--4" style="--drift-x: 10px">{site.hero.subheadline}</p>
+      <div class="hero__actions hero-entrance hero-entrance--5" style="--drift-x: -15px">
         <a href="#contact" class="btn">Request Quote</a>
         <a href="tel:+19104651175" class="hero__phone">(910) 465-1175</a>
       </div>
     </div>
-    <div class="hero__logo">
-      <img src={`${base}logos/hero.png`} alt="Technique Marine service vehicle" />
+    <div class="hero__logo hero-entrance hero-entrance--6" style="--drift-x: 30px">
+      <picture>
+        <source srcset={`${base}images/hero.png`} media="(min-width: 769px)" />
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='0' height='0'%3E%3C/svg%3E" alt="Technique Marine service vehicle parked at a marina" />
+      </picture>
     </div>
   </div>
 </section>
@@ -106,6 +109,10 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     height: 100%;
     object-fit: cover;
     display: block;
+  }
+
+  .hero__logo .hero-entrance {
+    animation-name: heroEntrance;
   }
 
   @media (max-width: 768px) {

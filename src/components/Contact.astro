@@ -2,31 +2,31 @@
 import site from '../content/site.json';
 ---
 
-<section class="contact" id="contact">
+<section class="contact" id="contact" aria-labelledby="contact-heading">
   <div class="contact__inner">
-    <div class="contact__header">
-      <h2 class="contact__title">Let's Connect</h2>
+    <div class="contact__header reveal reveal--fade-up">
+      <h2 id="contact-heading" class="contact__title">Let's Connect</h2>
       <p class="contact__sub">Ready to get your boat back on the water? Reach out and we'll get you sorted.</p>
     </div>
     <div class="contact__grid">
-      <div class="contact__info">
-        <a href={`tel:${site.phone.replace(/\D/g, '')}`} class="contact__card">
+      <div class="contact__info stagger-children">
+        <a href={`tel:${site.phone.replace(/\D/g, '')}`} class="contact__card reveal reveal--fade-left" style="--i: 0">
           <svg class="contact__card-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.48h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10a16 16 0 0 0 6.09 6.09l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           <span class="contact__card-label">Phone</span>
           <span class="contact__card-value">{site.phone}</span>
         </a>
-        <a href={`mailto:${site.email}`} class="contact__card">
+        <a href={`mailto:${site.email}`} class="contact__card reveal reveal--fade-left" style="--i: 1">
           <svg class="contact__card-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           <span class="contact__card-label">Email</span>
           <span class="contact__card-value">{site.email}</span>
         </a>
-        <div class="contact__card contact__card--map">
+        <div class="contact__card contact__card--map reveal reveal--fade-left" style="--i: 2">
           <span class="contact__card-label">Service Area</span>
           <span class="contact__card-value">Cape Fear, NC — within an hour of south Wilmington</span>
-          <div class="contact__map" id="contactMap" data-center='{"lat":34.2,"lng":-78.1}' data-radius="30"></div>
+          <div class="contact__map" id="contactMap" aria-label="Map showing 30-mile service radius around Cape Fear, NC" data-center='{"lat":34.2,"lng":-78.1}' data-radius="30"></div>
         </div>
       </div>
-      <form class="contact__form" id="contactForm" action="https://formspree.io/f/xrevvdpw" method="POST">
+      <form class="contact__form reveal reveal--fade-up" id="contactForm" action="https://formspree.io/f/xrevvdpw" method="POST">
         <input type="hidden" name="_next" value="https://jbkr43.github.io/technique-marine/thank-you" />
         <input type="text" name="_gotcha" class="contact__honeypot" tabindex="-1" autocomplete="off" />
         <div class="contact__field">
@@ -67,20 +67,35 @@ import site from '../content/site.json';
   </div>
 </section>
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" is:inline></script>
 <script is:inline>
   (function() {
     var el = document.getElementById('contactMap');
     if (!el) return;
-    try {
-      var center = JSON.parse(el.dataset.center);
-      var radiusMiles = parseFloat(el.dataset.radius);
-      var radiusMeters = radiusMiles * 1609.34;
-      var map = window.L.map(el, { center: [center.lat, center.lng], zoom: 8, zoomControl: false, scrollWheelZoom: false, dragging: false });
-      window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; <a href="https://openstreetmap.org/copyright">OSM</a>', maxZoom: 18 }).addTo(map);
-      window.L.circle([center.lat, center.lng], { radius: radiusMeters, color: '#b78330', fillColor: '#b78330', fillOpacity: 0.12, weight: 2 }).addTo(map);
-    } catch(e) { console.error('Map init failed', e); }
+
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+    document.head.appendChild(link);
+
+    function init() {
+      try {
+        var center = JSON.parse(el.dataset.center);
+        var radiusMiles = parseFloat(el.dataset.radius);
+        var radiusMeters = radiusMiles * 1609.34;
+        var map = window.L.map(el, { center: [center.lat, center.lng], zoom: 8, zoomControl: false, scrollWheelZoom: false, dragging: false });
+        window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; <a href="https://openstreetmap.org/copyright">OSM</a>', maxZoom: 18 }).addTo(map);
+        window.L.circle([center.lat, center.lng], { radius: radiusMeters, color: '#b78330', fillColor: '#b78330', fillOpacity: 0.12, weight: 2 }).addTo(map);
+      } catch(e) { console.error('Map init failed', e); }
+    }
+
+    if (typeof window.L !== 'undefined') {
+      init();
+    } else {
+      var script = document.createElement('script');
+      script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+      script.onload = init;
+      document.head.appendChild(script);
+    }
   })();
 </script>
 
@@ -137,16 +152,18 @@ import site from '../content/site.json';
     border-left: 4px solid var(--color-gold);
     border-radius: 6px;
     padding: 20px 24px;
-    transition: transform 0.2s;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     color: var(--color-navy);
   }
 
   .contact__card:hover {
     transform: translateX(4px);
+    box-shadow: 0 4px 16px rgba(30, 45, 61, 0.08);
   }
 
   .contact__card--map:hover {
     transform: none;
+    box-shadow: none;
   }
 
   .contact__card--map .contact__card-label {
@@ -365,4 +382,3 @@ import site from '../content/site.json';
     }
   });
 </script>
-

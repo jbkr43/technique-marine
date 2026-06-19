@@ -3,13 +3,13 @@ import site from '../content/site.json';
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
-<section class="about" id="about">
+<section class="about" id="about" aria-labelledby="about-heading">
   <div class="about__inner">
-    <div class="about__image">
-      <img src={`${base}logos/about.jpg`} alt="Dylan Henderson, Technique Marine" class="about__photo" />
+    <div class="about__image reveal reveal--drift" style="--drift-x: -20px">
+      <img src={`${base}images/about.jpg`} alt="Dylan Henderson, owner and operator of Technique Marine" class="about__photo" loading="lazy" />
     </div>
-    <div class="about__text">
-      <h2 class="about__title">Dylan Baker</h2>
+    <div class="about__text reveal reveal--drift" style="--drift-x: 0px">
+      <h2 id="about-heading" class="about__title">Dylan Baker</h2>
       <p class="about__role">Owner & Operator, Technique Marine</p>
       <p class="about__bio">
         For the last 14 years, Dylan has worked in the Cape Fear area marine industry. From servicing

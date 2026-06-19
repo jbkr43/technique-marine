@@ -2,14 +2,14 @@
 import testimonials from '../content/testimonials.json';
 ---
 
-<section class="testimonials" id="testimonials">
+<section class="testimonials" id="testimonials" aria-labelledby="testimonials-heading">
   <div class="testimonials__inner">
-    <div class="testimonials__header">
-      <h2 class="testimonials__title">Customer Testimonials</h2>
+    <div class="testimonials__header reveal reveal--fade-up">
+      <h2 id="testimonials-heading" class="testimonials__title">Customer Testimonials</h2>
     </div>
-    <div class="testimonials__grid">
-      {testimonials.map((t) => (
-        <div class="testimonials__card">
+    <div class="testimonials__grid stagger-children">
+      {testimonials.map((t, i) => (
+        <div class="testimonials__card reveal reveal--drift" style={`--i: ${i}; --drift-x: ${i % 2 === 0 ? '-10px' : '10px'}`}>
           <p class="testimonials__quote">"{t.text}"</p>
           <p class="testimonials__name">— {t.name}</p>
         </div>

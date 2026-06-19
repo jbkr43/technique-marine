@@ -6,6 +6,21 @@ interface Props {
 
 const { title = "Technique Marine | Mobile Marine Service & Delivery, Cape Fear NC", noindex } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+const fontFaceCss = `
+@font-face {
+  font-family: 'Alkaline';
+  src: url('${base}fonts/AlkalineTest-Regular-BF676e1b6ca889c.otf') format('opentype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Alkaline';
+  src: url('${base}fonts/AlkalineTest-Bold-BF676e1b6c6a873.otf') format('opentype');
+  font-weight: 700;
+  font-display: swap;
+}
+`;
 ---
 
 <!doctype html>
@@ -38,43 +53,13 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     <link rel="icon" type="image/x-icon" href={`${base}favicon.ico`} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
 
     <title>{title}</title>
 
+    <style set:html={fontFaceCss}></style>
+
     <style is:global>
-      @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
-
-      .skip-link {
-        position: absolute;
-        top: -100%;
-        left: 16px;
-        z-index: 999;
-        background-color: var(--color-gold);
-        color: var(--color-navy);
-        padding: 8px 16px;
-        border-radius: 4px;
-        font-weight: 600;
-        font-size: 0.875rem;
-        transition: top 0.15s;
-      }
-      .skip-link:focus {
-        top: 8px;
-      }
-
-      @font-face {
-        font-family: 'Alkaline';
-        src: url('/fonts/AlkalineTest-Regular-BF676e1b6ca889c.otf') format('opentype');
-        font-weight: 400;
-        font-display: swap;
-      }
-
-      @font-face {
-        font-family: 'Alkaline';
-        src: url('/fonts/AlkalineTest-Bold-BF676e1b6c6a873.otf') format('opentype');
-        font-weight: 700;
-        font-display: swap;
-      }
-
       :root {
         --color-navy: #1e2d3d;
         --color-steel: #7a9bb5;
@@ -86,6 +71,17 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         --font-body: system-ui, sans-serif;
         --max-width: 1100px;
         --section-padding: 80px 24px;
+        --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+        --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+        --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        --ease-drift: cubic-bezier(0.19, 0.72, 0.27, 1);
+        --z-skip-link: 100;
+        --z-sticky: 200;
+        --z-dropdown: 300;
+        --z-modal-backdrop: 400;
+        --z-modal: 500;
+        --z-toast: 600;
+        --z-tooltip: 700;
       }
 
       * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -99,6 +95,23 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
       a { color: inherit; text-decoration: none; }
       img { max-width: 100%; display: block; }
+
+      .skip-link {
+        position: absolute;
+        top: -100%;
+        left: 16px;
+        z-index: var(--z-skip-link);
+        background-color: var(--color-gold);
+        color: var(--color-navy);
+        padding: 8px 16px;
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: 0.875rem;
+        transition: top 0.15s;
+      }
+      .skip-link:focus {
+        top: 8px;
+      }
 
       .container {
         max-width: var(--max-width);
@@ -123,13 +136,97 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
       .btn:hover { opacity: 0.88; }
 
+      .btn:focus-visible {
+        outline: 2px solid var(--color-gold);
+        outline-offset: 2px;
+      }
+
       h1, h2, h3 {
         font-family: var(--font-display);
+      }
+
+      /* Scroll reveals */
+      .reveal {
+        opacity: 0;
+        transition: opacity 0.9s var(--ease-drift), transform 0.9s var(--ease-drift);
+      }
+
+      .reveal--fade-up {
+        transform: translateY(30px);
+      }
+
+      .reveal--fade-left {
+        transform: translateX(-30px);
+      }
+
+      .reveal--fade-right {
+        transform: translateX(30px);
+      }
+
+      .reveal--drift {
+        transform: translateY(30px) translateX(var(--drift-x, 0px));
+      }
+
+      .reveal--visible {
+        opacity: 1;
+        transform: translate(0);
+      }
+
+      .stagger-children > * {
+        transition-delay: calc(var(--i, 0) * 90ms);
+      }
+
+      /* Hero entrance */
+      .hero-entrance {
+        animation: heroEntrance 1s var(--ease-drift) both;
+      }
+
+      .hero-entrance--1 { animation-delay: 0.1s; }
+      .hero-entrance--2 { animation-delay: 0.2s; }
+      .hero-entrance--3 { animation-delay: 0.35s; }
+      .hero-entrance--4 { animation-delay: 0.45s; }
+      .hero-entrance--5 { animation-delay: 0.55s; }
+      .hero-entrance--6 { animation-delay: 0.3s; }
+
+      @keyframes heroEntrance {
+        from { opacity: 0; transform: translateY(24px) translateX(var(--drift-x, 0px)); }
+        to   { opacity: 1; transform: translateY(0) translateX(0); }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+        .reveal,
+        .hero-entrance {
+          opacity: 1;
+          transform: none;
+        }
       }
     </style>
   </head>
   <body>
     <a href="#main" class="skip-link">Skip to content</a>
     <slot />
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('reveal--visible');
+            } else {
+              entry.target.classList.remove('reveal--visible');
+            }
+          });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(function(el) {
+          observer.observe(el);
+        });
+      });
+    </script>
   </body>
 </html>

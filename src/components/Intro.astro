@@ -1,0 +1,68 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+
+<section class="intro" id="intro" aria-label="About Technique Marine">
+  <div class="intro__inner">
+    <div class="intro__content reveal reveal--drift" style="--drift-x: -16px">
+      <p class="intro__text">Owning a boat should be about enjoying the water, not managing a never-ending list of separate contractors, mechanics, and boatyard drop-offs. At Technique Marine, we eliminate the headache by providing a comprehensive, single-source mobile solution for absolutely everything your vessel requires.</p>
+      <p class="intro__text">We bring top-tier technique directly to your driveway, slip, or marina across the Carolinas. Whether you need an emergency bilge pump replaced, a complex Garmin NMEA network engineered, an annual Mercury engine service, a full hull detail, or a licensed USCG captain to deliver your yacht down the coast—we have the expertise to handle it. If it's on a boat, we can install it, fix it, clean it, maintain it, or captain it.</p>
+    </div>
+    <div class="intro__image reveal reveal--drift" style="--drift-x: 24px">
+      <img src={`${base}images/boat.jpg`} alt="Boat docked at a marina, reflecting Technique Marine's mobile service area" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .intro {
+    background-color: var(--color-cream);
+    padding: 80px 24px;
+  }
+
+  .intro__inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .intro__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .intro__text {
+    font-size: 1.05rem;
+    color: var(--color-navy);
+    line-height: 1.8;
+    opacity: 0.85;
+  }
+
+  .intro__image {
+    flex-shrink: 0;
+    width: 360px;
+  }
+
+  .intro__image img {
+    width: 100%;
+    border-radius: 6px;
+    border: 2px solid var(--color-gold);
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .intro__inner {
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .intro__image {
+      width: 100%;
+      max-width: 360px;
+    }
+  }
+</style>
