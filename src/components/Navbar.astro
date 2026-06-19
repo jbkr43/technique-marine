@@ -1,19 +1,19 @@
 ---
 import site from '../content/site.json';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
 <header class="navbar">
   <div class="navbar__inner">
     <a href="/" class="navbar__logo">
-      <img src="/logos/logo-badge.png" alt="Technique Marine" height="64" />
+      <img src={`${base}logos/logo-badge.png`} alt="Technique Marine" height="64" />
     </a>
     <nav class="navbar__links">
       <a href="#services">Services</a>
       <a href="#about">About</a>
       <a href="#testimonials">Testimonials</a>
-      <a href="#contact">Contact</a>
     </nav>
-    <a href="#contact" class="btn navbar__cta">Request Quote</a>
+    <a href="#contact" class="btn navbar__cta">Let's Connect</a>
     <button class="navbar__hamburger" aria-label="Open menu" aria-expanded="false">
       <span></span>
       <span></span>
@@ -21,13 +21,11 @@ import site from '../content/site.json';
     </button>
   </div>
 
-  <!-- Mobile menu -->
   <div class="navbar__mobile" aria-hidden="true">
     <a href="#services">Services</a>
     <a href="#about">About</a>
     <a href="#testimonials">Testimonials</a>
-    <a href="#contact">Contact</a>
-    <a href="#contact" class="btn">Request Quote</a>
+    <a href="#contact" class="btn">Let's Connect</a>
   </div>
 </header>
 
@@ -94,7 +92,20 @@ import site from '../content/site.json';
     width: 24px;
     height: 2px;
     background-color: var(--color-cream);
-    transition: all 0.2s;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+    transform-origin: center;
+  }
+
+  .navbar__hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .navbar__hamburger.open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .navbar__hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
   }
 
   .navbar__mobile {
@@ -104,13 +115,18 @@ import site from '../content/site.json';
     background-color: var(--color-navy);
     padding: 0 24px;
     overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.3s ease, padding 0.3s ease;
+    opacity: 0;
+    transform: scaleY(0.9);
+    transform-origin: top;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    pointer-events: none;
   }
 
   .navbar__mobile.open {
-    max-height: 400px;
+    opacity: 1;
+    transform: scaleY(1);
     padding: 16px 24px 24px;
+    pointer-events: auto;
   }
 
   .navbar__mobile a {
@@ -128,6 +144,14 @@ import site from '../content/site.json';
   }
 
   @media (max-width: 768px) {
+    .navbar__inner {
+      height: 56px;
+    }
+
+    .navbar__logo img {
+      height: 48px;
+    }
+
     .navbar__links,
     .navbar__cta {
       display: none;
@@ -149,7 +173,9 @@ import site from '../content/site.json';
 
   hamburger?.addEventListener('click', () => {
     const isOpen = mobile?.classList.toggle('open');
+    hamburger.classList.toggle('open');
     hamburger.setAttribute('aria-expanded', String(isOpen));
+    hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
     mobile?.setAttribute('aria-hidden', String(!isOpen));
   });
 </script>

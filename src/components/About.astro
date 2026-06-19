@@ -1,0 +1,124 @@
+---
+import site from '../content/site.json';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+
+<section class="about" id="about">
+  <div class="about__inner">
+    <div class="about__image">
+      <img src={`${base}logos/about.jpg`} alt="Dylan Henderson, Technique Marine" class="about__photo" />
+    </div>
+    <div class="about__text">
+      <h2 class="about__title">Dylan Baker</h2>
+      <p class="about__role">Owner & Operator, Technique Marine</p>
+      <p class="about__bio">
+        For the last 14 years, Dylan has worked in the Cape Fear area marine industry. From servicing
+        boats and fixing trailers to fleet management and captaining across the East Coast, he's done it all.
+      </p>
+      <p class="about__bio">
+        While some favorite projects are electrical installs, NMEA networking, and gel coat repair,
+        he is comfortable working on just about anything. Dylan is a Mercury Certified Technician,
+        but has experience on all major outboards, as well as large diesel engines and generators.
+      </p>
+      <p class="about__tagline">Jack of all trades, master of most — and ready to help you enjoy your boat with confidence.</p>
+      <div class="about__certs">
+        <span class="about__cert">Mercury Certified Technician</span>
+        <span class="about__cert">USCG Licensed Captain</span>
+        <span class="about__cert">14+ Years Experience</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    background-color: var(--color-navy);
+    color: var(--color-cream);
+    padding: var(--section-padding);
+  }
+
+  .about__inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 72px;
+  }
+
+  .about__image {
+    flex-shrink: 0;
+    width: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .about__photo {
+    width: 100%;
+    border-radius: 6px;
+    border: 2px solid var(--color-gold);
+  }
+
+  .about__text {
+    flex: 1;
+  }
+
+  .about__title {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: var(--color-cream);
+    margin-bottom: 4px;
+  }
+
+  .about__role {
+    font-size: 0.9rem;
+    color: var(--color-steel);
+    margin-bottom: 24px;
+    letter-spacing: 0.04em;
+  }
+
+  .about__bio {
+    font-size: 1rem;
+    color: var(--color-cream);
+    opacity: 0.85;
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .about__tagline {
+    font-family: var(--font-script);
+    font-size: 1.1rem;
+    color: var(--color-gold);
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+
+  .about__certs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  .about__cert {
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-navy);
+    background-color: var(--color-gold);
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .about__inner {
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .about__image {
+      width: 180px;
+    }
+  }
+</style>

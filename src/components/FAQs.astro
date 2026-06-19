@@ -1,0 +1,114 @@
+---
+import faqs from '../content/faqs.json';
+---
+
+<section class="faqs" id="faqs">
+  <div class="faqs__inner">
+    <div class="faqs__header">
+      <p class="faqs__eyebrow">Got questions?</p>
+      <h2 class="faqs__title">FAQs</h2>
+    </div>
+    <div class="faqs__list">
+      {faqs.map((faq) => (
+        <details class="faqs__item">
+          <summary class="faqs__question">{faq.question}</summary>
+          <p class="faqs__answer">{faq.answer}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faqs {
+    background-color: var(--color-navy);
+    color: var(--color-cream);
+    padding: var(--section-padding);
+  }
+
+  .faqs__inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .faqs__header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .faqs__eyebrow {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .faqs__title {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: var(--color-cream);
+  }
+
+  .faqs__list {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .faqs__item {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .faqs__item[open] {
+    border-color: var(--color-gold);
+  }
+
+  .faqs__question {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-cream);
+    padding: 20px 24px;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.2s;
+  }
+
+  .faqs__question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faqs__question::after {
+    content: '+';
+    font-size: 1.4rem;
+    color: var(--color-gold);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+    margin-left: 16px;
+  }
+
+  .faqs__item[open] .faqs__question::after {
+    transform: rotate(45deg);
+  }
+
+  .faqs__question:hover {
+    color: var(--color-gold);
+  }
+
+  .faqs__answer {
+    font-size: 0.95rem;
+    color: var(--color-cream);
+    opacity: 0.8;
+    line-height: 1.8;
+    padding: 0 24px 24px;
+  }
+</style>

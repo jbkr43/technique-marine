@@ -9,6 +9,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "deploy": "gh-pages -d dist",
     "astro": "astro"
   },
   "dependencies": {
@@ -20,6 +21,7 @@
     "axe-playwright": "^2.2.2",
     "eslint": "^10.5.0",
     "eslint-plugin-astro": "^1.7.0",
+    "gh-pages": "^6.3.0",
     "prettier": "^3.8.4"
   }
 }

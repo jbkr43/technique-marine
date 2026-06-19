@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="404 | Technique Marine" noindex={true}>
+  <Navbar />
+  <main id="main" class="notfound">
+    <div class="notfound__inner">
+      <span class="notfound__code">404</span>
+      <h1 class="notfound__title">Tide's out on this one</h1>
+      <p class="notfound__sub">The page you're looking for drifted away. Let's get you back to shore.</p>
+      <a href="/" class="btn">Back to Home</a>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .notfound {
+    background-color: var(--color-navy);
+    min-height: calc(100vh - 72px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 24px;
+  }
+
+  .notfound__inner {
+    max-width: 480px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .notfound__code {
+    font-size: 5rem;
+    font-weight: 700;
+    color: var(--color-gold);
+    line-height: 1;
+    font-family: var(--font-display);
+  }
+
+  .notfound__title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    color: var(--color-cream);
+  }
+
+  .notfound__sub {
+    font-size: 1rem;
+    color: var(--color-steel);
+    line-height: 1.7;
+  }
+</style>

@@ -1,0 +1,82 @@
+---
+import site from '../content/site.json';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__logo">
+      <img src={`${base}logos/branding-01.svg`} alt="Technique Marine" height="60" />
+    </div>
+    <div class="footer__details">
+      <p class="footer__name">{site.name}</p>
+      <p class="footer__tagline">{site.tagline}</p>
+      <div class="footer__links">
+        <a href={`tel:${site.phone.replace(/\D/g, '')}`}>{site.phone}</a>
+        <span>&nbsp;&bull;&nbsp;</span>
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+      </div>
+    </div>
+    <p class="footer__copy">&copy; {new Date().getFullYear()} Technique Marine. All rights reserved.</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: var(--color-navy);
+    color: var(--color-cream);
+    padding: 48px 24px;
+    border-top: 2px solid var(--color-gold);
+  }
+
+  .footer__inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .footer__name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-cream);
+    margin-bottom: 4px;
+  }
+
+  .footer__tagline {
+    font-size: 0.875rem;
+    color: var(--color-steel);
+    margin-bottom: 12px;
+  }
+
+  .footer__links {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .footer__links a {
+    color: var(--color-gold);
+    transition: opacity 0.2s;
+  }
+
+  .footer__links a:hover {
+    opacity: 0.75;
+  }
+
+  .footer__links span {
+    color: var(--color-steel);
+  }
+
+  .footer__copy {
+    font-size: 0.78rem;
+    color: var(--color-cream);
+    opacity: 0.75;
+  }
+</style>

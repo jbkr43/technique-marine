@@ -1,67 +1,135 @@
 ---
-
 interface Props {
   title?: string;
+  noindex?: boolean;
 }
 
-const { title = "Technique Marine | Mobile Marine Service & Delivery, Cape Fear NC" } = Astro.props;
+const { title = "Technique Marine | Mobile Marine Service & Delivery, Cape Fear NC", noindex } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-   <style is:global>
-  @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Mobile marine repair, maintenance, and delivery captain serving Cape Fear, NC and surrounding areas. One call solves it all." />
+    <meta name="theme-color" content="#1e2d3d" />
 
-  :root {
-    --color-navy: #1e2d3d;
-    --color-steel: #7a9bb5;
-    --color-gold: #b78330;
-    --color-cream: #f4f1e4;
-    --color-white: #ffffff;
-    --font-script: 'Dancing Script', cursive;
-    --font-body: system-ui, sans-serif;
-    --max-width: 1100px;
-    --section-padding: 80px 24px;
-  }
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content="Mobile marine repair, maintenance, electronics, and delivery captain. Serving Cape Fear, NC." />
+    <meta property="og:type" content="website" />
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Technique Marine",
+        "description": "Mobile marine repair, maintenance, and delivery captain serving Cape Fear, NC",
+        "telephone": "(910) 465-1175",
+        "email": "dylan@techniquemarine.com",
+        "areaServed": "Cape Fear, NC",
+        "url": "https://techniquemarine.com"
+      }
+    </script>
 
-  body {
-    font-family: var(--font-body);
-    background-color: var(--color-white);
-    color: var(--color-navy);
-    line-height: 1.6;
-  }
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <link rel="icon" type="image/x-icon" href={`${base}favicon.ico`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-  a { color: inherit; text-decoration: none; }
-  img { max-width: 100%; display: block; }
+    <title>{title}</title>
 
-  .container {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: var(--section-padding);
-  }
+    <style is:global>
+      @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
 
-  .btn {
-    display: inline-block;
-    background-color: var(--color-gold);
-    color: var(--color-navy);
-    padding: 12px 28px;
-    border-radius: 4px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    font-size: 0.875rem;
-    cursor: pointer;
-    border: none;
-    transition: opacity 0.2s;
-  }
+      .skip-link {
+        position: absolute;
+        top: -100%;
+        left: 16px;
+        z-index: 999;
+        background-color: var(--color-gold);
+        color: var(--color-navy);
+        padding: 8px 16px;
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: 0.875rem;
+        transition: top 0.15s;
+      }
+      .skip-link:focus {
+        top: 8px;
+      }
 
-  .btn:hover { opacity: 0.88; }
-</style>
+      @font-face {
+        font-family: 'Alkaline';
+        src: url('/fonts/AlkalineTest-Regular-BF676e1b6ca889c.otf') format('opentype');
+        font-weight: 400;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Alkaline';
+        src: url('/fonts/AlkalineTest-Bold-BF676e1b6c6a873.otf') format('opentype');
+        font-weight: 700;
+        font-display: swap;
+      }
+
+      :root {
+        --color-navy: #1e2d3d;
+        --color-steel: #7a9bb5;
+        --color-gold: #b78330;
+        --color-cream: #f4f1e4;
+        --color-white: #ffffff;
+        --font-script: 'Dancing Script', cursive;
+        --font-display: 'Alkaline', serif;
+        --font-body: system-ui, sans-serif;
+        --max-width: 1100px;
+        --section-padding: 80px 24px;
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        font-family: var(--font-body);
+        background-color: var(--color-white);
+        color: var(--color-navy);
+        line-height: 1.6;
+      }
+
+      a { color: inherit; text-decoration: none; }
+      img { max-width: 100%; display: block; }
+
+      .container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: var(--section-padding);
+      }
+
+      .btn {
+        display: inline-block;
+        background-color: var(--color-gold);
+        color: var(--color-navy);
+        padding: 12px 28px;
+        border-radius: 4px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        font-size: 0.875rem;
+        cursor: pointer;
+        border: none;
+        transition: opacity 0.2s;
+      }
+
+      .btn:hover { opacity: 0.88; }
+
+      h1, h2, h3 {
+        font-family: var(--font-display);
+      }
+    </style>
   </head>
   <body>
+    <a href="#main" class="skip-link">Skip to content</a>
     <slot />
   </body>
 </html>

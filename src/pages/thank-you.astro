@@ -1,0 +1,102 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Thank You | Technique Marine" noindex={true}>
+  <Navbar />
+  <main id="main" class="thankyou">
+    <div class="thankyou__inner">
+      <div class="thankyou__icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <h1 class="thankyou__title">Message Received</h1>
+      <p class="thankyou__sub">Thanks for reaching out. Dylan will be in touch with you shortly.</p>
+      <div class="thankyou__contact">
+        <p>Need to reach us directly in the meantime?</p>
+        <div class="thankyou__links">
+          <a href="tel:+19104651175">(910) 465-1175</a>
+          <span>&bull;</span>
+          <a href="mailto:dylan@techniquemarine.com">dylan@techniquemarine.com</a>
+        </div>
+      </div>
+      <a href="/" class="btn">Back to Home</a>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .thankyou {
+    background-color: var(--color-navy);
+    min-height: calc(100vh - 72px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 24px;
+  }
+
+  .thankyou__inner {
+    max-width: 520px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .thankyou__icon {
+    color: var(--color-gold);
+  }
+
+  .thankyou__title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--color-cream);
+  }
+
+  .thankyou__sub {
+    font-size: 1.1rem;
+    color: var(--color-steel);
+    line-height: 1.7;
+  }
+
+  .thankyou__contact {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: 24px 32px;
+    width: 100%;
+  }
+
+  .thankyou__contact p {
+    font-size: 0.9rem;
+    color: var(--color-steel);
+    margin-bottom: 12px;
+  }
+
+  .thankyou__links {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .thankyou__links a {
+    color: var(--color-gold);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: opacity 0.2s;
+  }
+
+  .thankyou__links a:hover {
+    opacity: 0.75;
+  }
+
+  .thankyou__links span {
+    color: var(--color-steel);
+  }
+</style>

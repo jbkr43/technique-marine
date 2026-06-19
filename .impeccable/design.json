@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-18T22:25:00.000Z",
+  "title": "Design System: Technique Marine",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Brass",
+        "canonical": "#b78330",
+        "tonalRamp": ["#3d2b0e", "#5a3f15", "#78531c", "#966823", "#b78330", "#c99f5a", "#dbb783", "#edcfad"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Channel Deep",
+        "canonical": "#1e2d3d",
+        "tonalRamp": ["#070b0f", "#0e1620", "#152130", "#1c2c41", "#1e2d3d", "#4a5764", "#76818b", "#a3abb2"]
+      },
+      "neutral-bg": {
+        "role": "neutral",
+        "displayName": "Dock Paper",
+        "canonical": "#f4f1e4",
+        "tonalRamp": ["#30302c", "#60605a", "#909087", "#bfbfb5", "#f4f1e4", "#f6f4ea", "#f8f7ef", "#fbfaf5"]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Weathered Tin",
+        "canonical": "#7a9bb5",
+        "tonalRamp": ["#18202b", "#2f4152", "#46617a", "#5d82a1", "#7a9bb5", "#95afc4", "#afc3d3", "#cad7e2"]
+      },
+      "neutral-surface": {
+        "role": "neutral",
+        "displayName": "White",
+        "canonical": "#ffffff",
+        "tonalRamp": ["#333333", "#666666", "#999999", "#cccccc", "#ffffff", "#ffffff", "#ffffff", "#ffffff"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Alkaline",
+        "purpose": "Hero and section headings only. Broad, bold serif."
+      },
+      "body": {
+        "displayName": "System UI Sans",
+        "purpose": "All running text. Clean, unobtrusive, reliable."
+      },
+      "label": {
+        "displayName": "System UI Uppercase",
+        "purpose": "Tracked uppercase labels, buttons, form labels."
+      },
+      "script": {
+        "displayName": "Dancing Script",
+        "purpose": "Italic taglines, accent quotes, hand-lettered warmth."
+      }
+    },
+    "shadows": [
+      {
+        "name": "card-hover",
+        "value": "0 8px 24px rgba(30, 45, 61, 0.1)",
+        "purpose": "Ambient lift on card hover state. Never used at rest."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-fade",
+        "value": "opacity 0.2s ease",
+        "purpose": "Button hover, link color transitions."
+      },
+      {
+        "name": "ease-lift",
+        "value": "transform 0.2s ease, box-shadow 0.2s ease",
+        "purpose": "Card hover lift and shadow."
+      },
+      {
+        "name": "ease-slide",
+        "value": "transform 0.2s ease",
+        "purpose": "Contact card directional hover (translateX)."
+      }
+    ],
+    "breakpoints": [
+      { "name": "mobile", "value": "768px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Gold uppercase CTA button on dark or light backgrounds.",
+      "html": "<button class=\"ds-btn-primary\">REQUEST QUOTE</button>",
+      "css": ".ds-btn-primary { background: #b78330; color: #1e2d3d; padding: 12px 28px; border-radius: 4px; font-family: system-ui, -apple-system, sans-serif; font-weight: 600; font-size: 0.875rem; letter-spacing: 0.04em; text-transform: uppercase; border: none; cursor: pointer; transition: opacity 0.2s; } .ds-btn-primary:hover { opacity: 0.88; } .ds-btn-primary:focus-visible { outline: 2px solid #b78330; outline-offset: 2px; }"
+    },
+    {
+      "name": "Service Card",
+      "kind": "card",
+      "refersTo": "card-service",
+      "description": "Three-column service grid card with gold top border accent.",
+      "html": "<div class=\"ds-card-service\"><h3 class=\"ds-card-service-title\">Maintenance & Routine Service</h3><p class=\"ds-card-service-desc\">From standard outboard maintenance to complex mechanical repairs, we keep your boat running the way it should.</p></div>",
+      "css": ".ds-card-service { background: #ffffff; border: 1px solid rgba(30, 45, 61, 0.1); border-top: 3px solid #b78330; border-radius: 6px; padding: 36px 28px; transition: transform 0.2s ease, box-shadow 0.2s ease; } .ds-card-service:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(30, 45, 61, 0.1); } .ds-card-service-title { font-family: Alkaline, Georgia, serif; font-size: 1.1rem; font-weight: 700; color: #1e2d3d; margin-bottom: 12px; line-height: 1.3; } .ds-card-service-desc { font-size: 0.95rem; color: #1e2d3d; opacity: 0.75; line-height: 1.7; }"
+    },
+    {
+      "name": "Contact Info Card",
+      "kind": "card",
+      "refersTo": "card-contact",
+      "description": "Contact method card with gold left border accent.",
+      "html": "<a class=\"ds-card-contact\" href=\"tel:+19104651175\"><svg class=\"ds-card-contact-icon\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#b78330\" stroke-width=\"2\"><path d=\"M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.48h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10a16 16 0 0 0 6.09 6.09l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z\"/></svg><span class=\"ds-card-contact-label\">Phone</span><span class=\"ds-card-contact-value\">(910) 465-1175</span></a>",
+      "css": ".ds-card-contact { display: flex; flex-direction: column; gap: 4px; background: #ffffff; border: 1px solid rgba(30, 45, 61, 0.1); border-left: 4px solid #b78330; border-radius: 6px; padding: 20px 24px; transition: transform 0.2s ease; color: #1e2d3d; text-decoration: none; } .ds-card-contact:hover { transform: translateX(4px); } .ds-card-contact-icon { width: 24px; height: 24px; color: #b78330; margin-bottom: 4px; } .ds-card-contact-label { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: #b78330; font-weight: 600; font-family: system-ui, -apple-system, sans-serif; } .ds-card-contact-value { font-size: 1rem; font-weight: 600; color: #1e2d3d; line-height: 1.5; font-family: system-ui, -apple-system, sans-serif; }"
+    },
+    {
+      "name": "Form Input",
+      "kind": "input",
+      "refersTo": "form-input",
+      "description": "Text input and textarea with gold focus state.",
+      "html": "<div style=\"display: flex; flex-direction: column; gap: 6px;\"><label class=\"ds-input-label\" for=\"demo-name\">Name</label><input class=\"ds-input\" id=\"demo-name\" type=\"text\" placeholder=\"Your name\" /></div>",
+      "css": ".ds-input-label { font-size: 0.85rem; font-weight: 600; color: #1e2d3d; letter-spacing: 0.04em; text-transform: uppercase; font-family: system-ui, -apple-system, sans-serif; } .ds-input { font-family: system-ui, -apple-system, sans-serif; font-size: 1rem; color: #1e2d3d; background: #f4f1e4; border: 1px solid rgba(30, 45, 61, 0.2); border-radius: 4px; padding: 12px 16px; outline: none; transition: border-color 0.2s; } .ds-input:focus { border-color: #b78330; } .ds-input::placeholder { color: #1e2d3d; opacity: 0.4; }"
+    },
+    {
+      "name": "FAQ Accordion",
+      "kind": "custom",
+      "refersTo": "faq-item",
+      "description": "Expandable FAQ item with gold open state.",
+      "html": "<details class=\"ds-faq\" open><summary class=\"ds-faq-q\">What areas do you serve?<span class=\"ds-faq-icon\">+</span></summary><p class=\"ds-faq-a\">We serve Cape Fear, NC and the surrounding area, within roughly one hour of south Wilmington.</p></details>",
+      "css": ".ds-faq { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; overflow: hidden; } .ds-faq[open] { border-color: #b78330; } .ds-faq-q { font-size: 1rem; font-weight: 600; color: #f4f1e4; padding: 20px 24px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; transition: color 0.2s; font-family: system-ui, -apple-system, sans-serif; } .ds-faq-q::-webkit-details-marker { display: none; } .ds-faq-q:hover { color: #b78330; } .ds-faq-icon { font-size: 1.4rem; color: #b78330; transition: transform 0.2s; flex-shrink: 0; margin-left: 16px; } .ds-faq[open] .ds-faq-icon { transform: rotate(45deg); } .ds-faq-a { font-size: 0.95rem; color: #f4f1e4; opacity: 0.8; line-height: 1.8; padding: 0 24px 24px; font-family: system-ui, -apple-system, sans-serif; }"
+    },
+    {
+      "name": "Navbar Link",
+      "kind": "nav",
+      "refersTo": "navbar-link",
+      "description": "Uppercase navigation link in dark navbar.",
+      "html": "<nav style=\"background: #1e2d3d; padding: 12px 24px; display: flex; gap: 28px; border-bottom: 2px solid #b78330;\"><a class=\"ds-nav-link\" href=\"#\">Services</a><a class=\"ds-nav-link\" href=\"#\">About</a><a class=\"ds-nav-link\" href=\"#\">Testimonials</a></nav>",
+      "css": ".ds-nav-link { color: #f4f1e4; font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 500; text-decoration: none; font-family: system-ui, -apple-system, sans-serif; transition: color 0.2s; } .ds-nav-link:hover { color: #b78330; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Working Waterfront",
+    "overview": "This is a design system built for a mobile marine service that shows up, knows its craft, and doesn't waste your time. It rejects the polished-corporate marine aesthetic (gold-anchor clipart, rope borders, navy blazer) in favor of something more honest: the textures and tones of an actual working waterfront — diesel-stained concrete, galvanized steel, worn brass fittings, the deep channel at dusk.\n\nThe system is flat by default, tonal by nature. Depth comes from contrast — navy fields against cream, gold against dark — not from shadows. The palette is constrained: a single saturated accent (Brass) earns its place by scarcity. Typography is muscular (Alkaline display) paired with clean system body text. There is no decoration that doesn't earn its keep.",
+    "keyCharacteristics": [
+      "Dark-on-light section alternation (Channel Deep / Dock Paper) creates rhythm without cards",
+      "Single accent color (Brass) used sparingly for paths and emphasis",
+      "Uppercase tracked labels as a deliberate brand voice, not scaffolding",
+      "Flat surfaces, sharp edges, purposeful restraint",
+      "No nautical kitsch — the work speaks for itself"
+    ],
+    "rules": [
+      { "name": "The Brass Rarity Rule", "body": "Brass appears on ≤10% of any given screen. Its scarcity is what gives it weight. If a page has more Brass than Channel Deep, the accent has become the background — pull it back.", "section": "colors" },
+      { "name": "The No-Nautical-Kitsch Rule", "body": "No anchor icons, rope textures, boat-wheel motifs, or anything that reads 'decorative marine.'", "section": "colors" },
+      { "name": "The Alkaline Rule", "body": "Alkaline is for headings only. Never use it for body copy, captions, or labels. Its weight demands breathing room.", "section": "typography" },
+      { "name": "The Uppercase Discipline", "body": "The tracked uppercase label is a deliberate brand element, not default section grammar. Currently used on the hero (location tagline) and FAQs only. Every other section lets the heading stand alone.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "Surfaces have no shadow at rest. Elevation appears only as a response to interaction (card hover, button press).", "section": "elevation" }
+    ],
+    "dos": [
+      "Use Brass sparingly — ≤10% of any screen. Its rarity is its power.",
+      "Alternate Channel Deep and Dock Paper as the rhythm of the page. Dark section, light section, dark, light.",
+      "Keep surfaces flat at rest. Depth comes from tonal contrast, not shadows.",
+      "Set body text at Channel Deep (#1e2d3d) on Dock Paper or White backgrounds. Verify ≥4.5:1 contrast.",
+      "Use Alkaline for headings only — it needs room to breathe.",
+      "Let the work speak. No decoration that doesn't earn its place."
+    ],
+    "donts": [
+      "Don't use anchor icons, rope borders, boat-wheel motifs, or any decorative nautical kitsch.",
+      "Don't use side-stripe borders (>1px) on cards as a decorative accent — unless it's the deliberate gold/steel left/top accent system.",
+      "Don't use gradient text, glassmorphism, or bounce/elastic easing.",
+      "Don't default to editorial-magazine aesthetics (italic serif display, ruled columns, drop caps).",
+      "Don't use Weathered Tin (#7a9bb5) for body text — it fails contrast on Dock Paper.",
+      "Don't nest cards inside cards.",
+      "Don't give every section a tracked uppercase eyebrow. Currently used on hero and FAQs only — any new section must earn its eyebrow.",
+      "Don't use corporate-polished or 'nautical bank' design language.",
+      "Don't ship pure black (#000) or pure gray (#808080).",
+      "Don't use bounce or elastic easing."
+    ]
+  }
+}

@@ -1,0 +1,83 @@
+---
+import testimonials from '../content/testimonials.json';
+---
+
+<section class="testimonials" id="testimonials">
+  <div class="testimonials__inner">
+    <div class="testimonials__header">
+      <h2 class="testimonials__title">Customer Testimonials</h2>
+    </div>
+    <div class="testimonials__grid">
+      {testimonials.map((t) => (
+        <div class="testimonials__card">
+          <p class="testimonials__quote">"{t.text}"</p>
+          <p class="testimonials__name">— {t.name}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials {
+    background-color: var(--color-cream);
+    padding: var(--section-padding);
+  }
+
+  .testimonials__inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .testimonials__header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .testimonials__title {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: var(--color-navy);
+  }
+
+  .testimonials__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .testimonials__card {
+    background-color: var(--color-white);
+    border: 1px solid rgba(30, 45, 61, 0.1);
+    border-left: 4px solid var(--color-steel);
+    border-radius: 6px;
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .testimonials__quote {
+    font-size: 0.95rem;
+    color: var(--color-navy);
+    line-height: 1.8;
+    opacity: 0.85;
+    font-style: italic;
+    text-align: left;
+  }
+
+  .testimonials__name {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--color-gold);
+    letter-spacing: 0.04em;
+    text-align: right;
+  }
+
+  @media (max-width: 768px) {
+    .testimonials__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
