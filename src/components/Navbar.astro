@@ -5,7 +5,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
 <header class="navbar">
   <div class="navbar__inner">
-    <a href="/" class="navbar__logo">
+    <a href={base} class="navbar__logo">
       <img src={`${base}logos/logo-badge.png`} alt="Technique Marine" />
     </a>
     <nav class="navbar__links">

@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
 <Layout title="404 | Technique Marine" noindex={true}>
@@ -11,7 +12,7 @@ import Footer from '../components/Footer.astro';
       <span class="notfound__code">404</span>
       <h1 class="notfound__title">Tide's out on this one</h1>
       <p class="notfound__sub">The page you're looking for drifted away. Let's get you back to shore.</p>
-      <a href="/" class="btn">Back to Home</a>
+      <a href={base} class="btn">Back to Home</a>
     </div>
   </main>
   <Footer />
