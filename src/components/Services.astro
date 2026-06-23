@@ -1,5 +1,6 @@
 ---
 import services from '../content/services.json';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
 <section class="services" id="services" aria-labelledby="services-heading">
@@ -11,8 +12,11 @@ import services from '../content/services.json';
     <div class="services__grid stagger-children">
       {services.map((service, i) => (
         <div class="services__card reveal reveal--drift" style={`--i: ${i}; --drift-x: ${i % 2 === 0 ? '-12px' : '12px'}`}>
-          <h3 class="services__card-title">{service.title}</h3>
-          <p class="services__card-desc">{service.description}</p>
+          <img src={`${base}images/${service.image}`} alt="" class="services__card-img" loading="lazy" />
+          <div class="services__card-body">
+            <h3 class="services__card-title">{service.title}</h3>
+            <p class="services__card-desc">{service.description}</p>
+          </div>
         </div>
       ))}
     </div>
@@ -60,15 +64,26 @@ import services from '../content/services.json';
   .services__card {
     background-color: var(--color-white);
     border: 1px solid rgba(30, 45, 61, 0.1);
-    border-top: 3px solid var(--color-gold);
     border-radius: 6px;
-    padding: 36px 28px;
+    overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
   }
 
   .services__card:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 24px rgba(30, 45, 61, 0.1);
+  }
+
+  .services__card-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    border-bottom: 3px solid var(--color-gold);
+  }
+
+  .services__card-body {
+    padding: 28px;
   }
 
   .services__card-title {

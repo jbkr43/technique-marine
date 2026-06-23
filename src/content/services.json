@@ -1,14 +1,17 @@
 [
   {
     "title": "Maintenance & Routine Service",
-    "description": "From standard outboard maintenance to complex mechanical repairs, we keep your boat running the way it should."
+    "description": "From standard outboard maintenance to complex mechanical repairs, we keep your boat running the way it should.",
+    "image": "service-maintenance.png"
   },
   {
     "title": "Electronics & NMEA Networking",
-    "description": "Keep your navigation precise and your power reliable. We handle complete electrical overhauls and cutting-edge marine tech integrations."
+    "description": "Keep your navigation precise and your power reliable. We handle complete electrical overhauls and cutting-edge marine tech integrations.",
+    "image": "service-electronics.png"
   },
   {
     "title": "Plumbing, Rigging & Onboard Amenities",
-    "description": "If it moves water, holds air, or secures gear, we service it to ensure your time on the water is comfortable and safe."
+    "description": "If it moves water, holds air, or secures gear, we service it to ensure your time on the water is comfortable and safe.",
+    "image": "service-amenities.png"
   }
 ]
