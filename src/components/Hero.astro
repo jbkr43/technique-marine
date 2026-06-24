@@ -7,7 +7,12 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   <div class="hero__inner">
     <div class="hero__text">
       <p class="hero__tagline hero-entrance hero-entrance--1" style="--drift-x: -15px">{site.serviceArea}</p>
-      <h1 id="hero-heading" class="hero__headline hero-entrance hero-entrance--2" style="--drift-x: 20px">{site.hero.headline}</h1>
+      <div id="hero-heading" class="hero__headline-logo hero-entrance hero-entrance--2">
+        <picture>
+          <source srcset={`${base}images/hero.png`} media="(min-width: 769px)" />
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='0' height='0'%3E%3C/svg%3E" alt="Technique Marine" />
+        </picture>
+      </div>
       <p class="hero__sub hero-entrance hero-entrance--3" style="--drift-x: -12px">{site.tagline}</p>
       <p class="hero__one-call hero-entrance hero-entrance--4" style="--drift-x: 10px">{site.hero.subheadline}</p>
       <div class="hero__actions hero-entrance hero-entrance--5" style="--drift-x: -15px">
@@ -15,20 +20,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         <a href="tel:+19104651175" class="hero__phone">(910) 465-1175</a>
       </div>
     </div>
-    <div class="hero__logo hero-entrance hero-entrance--6" style="--drift-x: 30px">
-      <picture>
-        <source srcset={`${base}images/hero.png`} media="(min-width: 769px)" />
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='0' height='0'%3E%3C/svg%3E" alt="Technique Marine service vehicle parked at a marina" />
-      </picture>
-    </div>
   </div>
   <div class="hero__bottom">
-    <div class="hero__bottom-logo">
-      <picture>
-        <source srcset={`${base}images/hero.png`} media="(min-width: 769px)" />
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='0' height='0'%3E%3C/svg%3E" alt="" />
-      </picture>
-    </div>
     <p class="hero__comprehensive">Comprehensive Marine Care — Straight to You</p>
     <p class="hero__body">We bring top-tier technique directly to your driveway, slip, or marina across the Carolinas. Whether you need an emergency bilge pump replaced, a complex Garmin NMEA network engineered, an annual Mercury engine service, a full hull detail, or a licensed USCG captain to deliver your yacht down the coast—we have the expertise to handle it. If it's on a boat, we can install it, fix it, clean it, maintain it, or captain it.</p>
   </div>
@@ -44,15 +37,10 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   .hero__inner {
     max-width: var(--max-width);
     margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 48px;
   }
 
   .hero__text {
-    flex: 1;
-    max-width: 580px;
+    max-width: 700px;
   }
 
   .hero__tagline {
@@ -64,12 +52,19 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     font-weight: 600;
   }
 
-  .hero__headline {
-    font-size: clamp(2rem, 5vw, 3.25rem);
-    font-weight: 700;
-    line-height: 1.15;
-    color: var(--color-cream);
-    margin-bottom: 20px;
+  .hero__headline-logo {
+    width: 320px;
+    border-radius: 6px;
+    border: 2px solid var(--color-gold);
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .hero__headline-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   .hero__sub {
@@ -106,45 +101,11 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     color: var(--color-gold);
   }
 
-  .hero__logo {
-    flex-shrink: 0;
-    width: 400px;
-    border-radius: 6px;
-    border: 2px solid var(--color-gold);
-    overflow: hidden;
-  }
-
-  .hero__logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .hero__logo .hero-entrance {
-    animation-name: heroEntrance;
-  }
-
   .hero__bottom {
     max-width: var(--max-width);
     margin: 64px auto 0;
     padding-top: 40px;
     border-top: 1px solid rgba(244, 241, 228, 0.12);
-  }
-
-  .hero__bottom-logo {
-    width: 280px;
-    border-radius: 6px;
-    border: 2px solid var(--color-gold);
-    overflow: hidden;
-    margin-bottom: 24px;
-  }
-
-  .hero__bottom-logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
   }
 
   .hero__comprehensive {
@@ -164,15 +125,6 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   }
 
   @media (max-width: 768px) {
-    .hero__logo {
-      display: none;
-    }
-
-    .hero__inner {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
     .hero__bottom {
       margin-top: 48px;
       padding-top: 32px;
