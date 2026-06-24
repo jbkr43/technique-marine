@@ -18,7 +18,10 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       <p class="hero__comprehensive">Comprehensive Marine Care — Straight to You</p>
       <p class="hero__body">We bring top-tier technique directly to your driveway, slip, or marina across the Carolinas. Whether you need an emergency bilge pump replaced, a complex Garmin NMEA network engineered, an annual Mercury engine service, a full hull detail, or a licensed USCG captain to deliver your yacht down the coast—we have the expertise to handle it. If it's on a boat, we can install it, fix it, clean it, maintain it, or captain it.</p>
       <div class="hero__actions hero-entrance hero-entrance--5" style="--drift-x: -15px">
-        <a href="tel:+19104651175" class="btn">Call Now</a>
+        <a href="tel:+19104651175" class="hero__call-btn">
+          <svg class="hero__call-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.48h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10a16 16 0 0 0 6.09 6.09l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Call Now: (910) 465-1175
+        </a>
       </div>
     </div>
   </div>
@@ -87,16 +90,28 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     margin-top: 36px;
   }
 
-  .hero__phone {
-    color: var(--color-cream);
+  .hero__call-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--color-gold);
+    color: var(--color-navy);
+    padding: 16px 36px;
+    border-radius: 8px;
     font-size: 1.1rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.02em;
-    transition: color 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
   }
 
-  .hero__phone:hover {
-    color: var(--color-gold);
+  .hero__call-btn:hover {
+    background-color: #d4943a;
+    transform: scale(1.03);
+    box-shadow: 0 6px 24px rgba(183, 131, 48, 0.4);
+  }
+
+  .hero__call-icon {
+    flex-shrink: 0;
   }
 
   .hero__comprehensive {
