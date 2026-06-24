@@ -9,7 +9,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       <p class="hero__tagline hero-entrance hero-entrance--1" style="--drift-x: -15px">{site.serviceArea}</p>
       <div id="hero-heading" class="hero__headline-logo hero-entrance hero-entrance--2">
         <picture>
-          <source srcset={`${base}images/hero.png`} media="(min-width: 769px)" />
+          <source srcset={`${base}images/tmhero.png`} media="(min-width: 769px)" />
           <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='0' height='0'%3E%3C/svg%3E" alt="Technique Marine" />
         </picture>
       </div>
@@ -55,7 +55,6 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   .hero__headline-logo {
     width: 320px;
     border-radius: 6px;
-    border: 2px solid var(--color-gold);
     overflow: hidden;
     margin-bottom: 24px;
   }
