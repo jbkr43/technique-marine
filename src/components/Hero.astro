@@ -23,7 +23,12 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     </div>
   </div>
   <div class="hero__bottom">
-    <p class="hero__comprehensive">Comprehensive Marine Care — Straight to You</p>
+    <div class="hero__bottom-logo">
+      <picture>
+        <source srcset={`${base}images/hero.png`} media="(min-width: 769px)" />
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='0' height='0'%3E%3C/svg%3E" alt="Technique Marine service vehicle parked at a marina" />
+      </picture>
+    </div>
     <p class="hero__body">We bring top-tier technique directly to your driveway, slip, or marina across the Carolinas. Whether you need an emergency bilge pump replaced, a complex Garmin NMEA network engineered, an annual Mercury engine service, a full hull detail, or a licensed USCG captain to deliver your yacht down the coast—we have the expertise to handle it. If it's on a boat, we can install it, fix it, clean it, maintain it, or captain it.</p>
   </div>
 </section>
@@ -126,13 +131,19 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     border-top: 1px solid rgba(244, 241, 228, 0.12);
   }
 
-  .hero__comprehensive {
-    font-size: clamp(1.15rem, 2vw, 1.35rem);
-    font-weight: 700;
-    color: var(--color-gold);
-    margin-bottom: 16px;
-    line-height: 1.4;
-    max-width: 600px;
+  .hero__bottom-logo {
+    width: 280px;
+    border-radius: 6px;
+    border: 2px solid var(--color-gold);
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .hero__bottom-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   .hero__body {
