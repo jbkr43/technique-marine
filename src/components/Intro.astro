@@ -2,9 +2,10 @@
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
-<section class="intro" id="intro" aria-label="About Technique Marine">
+<section class="intro" id="intro" aria-labelledby="intro-heading">
   <div class="intro__inner">
     <div class="intro__content reveal reveal--drift" style="--drift-x: -16px">
+      <h2 id="intro-heading" class="intro__heading">How We Work</h2>
       <p class="intro__text">Owning a boat should be about enjoying the water, not managing a never-ending list of separate contractors, mechanics, and boatyard drop-offs. At Technique Marine, we eliminate the headache by providing a comprehensive, single-source mobile solution for absolutely everything your vessel requires.</p>
       <p class="intro__text">We bring top-tier technique directly to your driveway, slip, or marina across the Carolinas. Whether you need an emergency bilge pump replaced, a complex Garmin NMEA network engineered, an annual Mercury engine service, a full hull detail, or a licensed USCG captain to deliver your yacht down the coast—we have the expertise to handle it. If it's on a boat, we can install it, fix it, clean it, maintain it, or captain it.</p>
     </div>
@@ -32,7 +33,13 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
+  }
+
+  .intro__heading {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: var(--color-navy);
   }
 
   .intro__text {

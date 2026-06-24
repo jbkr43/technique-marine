@@ -6,21 +6,6 @@ interface Props {
 
 const { title = "Technique Marine | Mobile Marine Service & Delivery, Cape Fear NC", noindex } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
-
-const fontFaceCss = `
-@font-face {
-  font-family: 'Alkaline';
-  src: url('${base}fonts/AlkalineTest-Regular-BF676e1b6ca889c.otf') format('opentype');
-  font-weight: 400;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Alkaline';
-  src: url('${base}fonts/AlkalineTest-Bold-BF676e1b6c6a873.otf') format('opentype');
-  font-weight: 700;
-  font-display: swap;
-}
-`;
 ---
 
 <!doctype html>
@@ -57,8 +42,6 @@ const fontFaceCss = `
 
     <title>{title}</title>
 
-    <style set:html={fontFaceCss}></style>
-
     <style is:global>
       :root {
         --color-navy: #1e2d3d;
@@ -67,7 +50,7 @@ const fontFaceCss = `
         --color-cream: #f4f1e4;
         --color-white: #ffffff;
         --font-script: 'Dancing Script', cursive;
-        --font-display: 'Alkaline', serif;
+        --font-display: system-ui, sans-serif;
         --font-body: system-ui, sans-serif;
         --max-width: 1100px;
         --section-padding: 80px 24px;
