@@ -159,31 +159,13 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         transition-delay: calc(var(--i, 0) * 90ms);
       }
 
-      /* Hero entrance */
-      .hero-entrance {
-        animation: heroEntrance 1s var(--ease-drift) both;
-      }
-
-      .hero-entrance--1 { animation-delay: 0.1s; }
-      .hero-entrance--2 { animation-delay: 0.2s; }
-      .hero-entrance--3 { animation-delay: 0.35s; }
-      .hero-entrance--4 { animation-delay: 0.45s; }
-      .hero-entrance--5 { animation-delay: 0.55s; }
-      .hero-entrance--6 { animation-delay: 0.3s; }
-
-      @keyframes heroEntrance {
-        from { opacity: 0; transform: translateY(24px) translateX(var(--drift-x, 0px)); }
-        to   { opacity: 1; transform: translateY(0) translateX(0); }
-      }
-
       @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after {
           animation-duration: 0.01ms !important;
           animation-iteration-count: 1 !important;
           transition-duration: 0.01ms !important;
         }
-        .reveal,
-        .hero-entrance {
+        .reveal {
           opacity: 1;
           transform: none;
         }
