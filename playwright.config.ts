@@ -4,6 +4,7 @@ export default defineConfig({
   testDir: './tests',
   timeout: 15000,
   retries: 1,
+  reporter: process.env.CI ? [['html'], ['github']] : [['html']],
   use: {
     baseURL: 'http://localhost:4321',
     browserName: 'chromium',
