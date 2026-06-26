@@ -1,0 +1,19 @@
+# Static site — Technique Marine
+DirectoryIndex index.html
+RewriteEngine On
+
+# Custom 404
+ErrorDocument 404 /404.html
+
+# Serve existing files or directories directly
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# Serve index.html for subdirectory paths
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.+)/?$ /$1/index.html [L]
+
+# Cache static assets
+<FilesMatch "\.(css|js|png|jpg|jpeg|gif|svg|ico|webp|woff2?)$">
+  Header set Cache-Control "public, max-age=31536000, immutable"
+</FilesMatch>

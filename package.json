@@ -9,6 +9,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
     "deploy": "gh-pages -d dist",
     "astro": "astro"
   },

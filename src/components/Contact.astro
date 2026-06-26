@@ -26,8 +26,8 @@ import site from '../content/site.json';
           <div class="contact__map" id="contactMap" aria-label="Map showing 30-mile service radius around Cape Fear, NC" data-center='{"lat":34.2,"lng":-78.1}' data-radius="30"></div>
         </div>
       </div>
-      <form class="contact__form reveal reveal--fade-up" id="contactForm" action="https://formspree.io/f/xrevvdpw" method="POST">
-        <input type="hidden" name="_next" value="https://jbkr43.github.io/technique-marine/thank-you" />
+      <form class="contact__form reveal reveal--fade-up" id="contactForm" action="https://formspree.io/f/xrevvdpw" method="POST" novalidate>
+        <input type="hidden" name="_next" value="https://techniquemarine.com/thank-you" />
         <input type="text" name="_gotcha" class="contact__honeypot" tabindex="-1" autocomplete="off" />
         <div class="contact__field">
           <label for="name">Name</label>
@@ -278,11 +278,7 @@ import site from '../content/site.json';
   }
 
   .contact__honeypot {
-    position: absolute;
-    left: -9999px;
-    opacity: 0;
-    height: 0;
-    width: 0;
+    display: none;
   }
 
   .btn--loading {
@@ -323,6 +319,13 @@ import site from '../content/site.json';
   const submitBtn = document.getElementById('submitBtn');
   const submitText = submitBtn?.querySelector('.btn__text');
   const formError = document.getElementById('formError');
+
+  window.addEventListener('pageshow', function() {
+    if (submitBtn) submitBtn.classList.remove('btn--loading');
+    if (submitText) submitText.textContent = 'Send Message';
+    if (formError) formError.hidden = true;
+    if (form) form.reset();
+  });
 
   const fields = [
     { id: 'name', validate: (v) => v.trim() ? '' : 'Name is required' },
