@@ -1,43 +1,39 @@
-# Astro Starter Kit: Minimal
+# Technique Marine
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Mobile marine service, maintenance, electronics, and delivery captain serving Cape Fear, NC.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Commands
 
-## 🚀 Project Structure
+| Command | Action |
+|---------|--------|
+| `npm install` | Install dependencies |
+| `npm run dev` | Start dev server at `localhost:4321` |
+| `npm run build` | Build production site to `dist/` |
+| `npm run preview` | Preview built site locally |
+| `npm run test` | Run Playwright smoke tests |
+| `npm run test:ui` | Run Playwright tests with UI |
 
-Inside of your Astro project, you'll see the following folders and files:
+## CI/CD
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+- **Every push** — Build + smoke tests (CI)
+- **Merge to `main`** — Build + smoke + full tests → Deploy to Hostinger + test report to GitHub Pages
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Branch protection on `main` enforces CI passing before merge.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Secrets
 
-Any static assets, like images, can be placed in the `public/` directory.
+Required in GitHub repo settings (`Settings → Secrets and variables → Actions`):
 
-## 🧞 Commands
+| Secret | Description |
+|--------|-------------|
+| `FTP_HOST` | Hostinger FTP server (IP or hostname) |
+| `FTP_USERNAME` | Hostinger FTP login |
+| `FTP_PASSWORD` | Hostinger FTP password |
 
-All commands are run from the root of the project, from a terminal:
+## Tech Stack
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- [Astro](https://astro.build) — static site generation
+- [Playwright](https://playwright.dev) — browser testing
+- Hostinger — production hosting
+- GitHub Pages — test report hosting
+- Formspree — contact form handler
