@@ -6,7 +6,6 @@ interface Props {
 
 const { title = "Technique Marine | Mobile Marine Service & Delivery, Cape Fear NC", noindex } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
-const IS_PROD = import.meta.env.PROD;
 ---
 
 <!doctype html>
@@ -283,7 +282,6 @@ const IS_PROD = import.meta.env.PROD;
       (function() {
         var GA_ID = 'G-FE89TG42ZQ';
         var KEY = 'consent';
-        var IS_PROD = {IS_PROD};
 
         function getConsent() {
           return localStorage.getItem(KEY);
@@ -294,7 +292,6 @@ const IS_PROD = import.meta.env.PROD;
         }
 
         function loadGA() {
-          if (!IS_PROD) return;
           if (window.__gtagLoaded) return;
           window.__gtagLoaded = true;
 
@@ -305,7 +302,6 @@ const IS_PROD = import.meta.env.PROD;
 
           window.dataLayer = window.dataLayer || [];
           function gtag(){ dataLayer.push(arguments); }
-          window.gtag = gtag;
           gtag('js', new Date());
           gtag('config', GA_ID, { 'anonymize_ip': true });
         }
