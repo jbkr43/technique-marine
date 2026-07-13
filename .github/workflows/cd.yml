@@ -98,3 +98,45 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: dist/
           server-dir: /
+
+  notify:
+    needs: deploy
+    runs-on: ubuntu-latest
+    env:
+      # Accept a comma-separated list of recipient emails in the secret EMAIL_TO
+      RECIPIENTS: ${{ secrets.EMAIL_TO }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Prepare commit summary
+        id: summary
+        run: |
+          BEFORE=${{ github.event.before }}
+          AFTER=${{ github.sha }}
+          if [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            git --no-pager log -n 10 --pretty=format:"- %h %s (%an)" HEAD > commits.txt || true
+          else
+            git --no-pager log --pretty=format:"- %h %s (%an)" $BEFORE..$AFTER > commits.txt || true
+          fi
+          echo "subject=Deployment to ${{ github.ref }} ($AFTER)" >> $GITHUB_OUTPUT
+          echo "body<<EOF" >> $GITHUB_OUTPUT
+          echo "The following commits were deployed:" >> $GITHUB_OUTPUT
+          cat commits.txt >> $GITHUB_OUTPUT
+          echo "\n--\nView on GitHub: https://github.com/${{ github.repository }}/commit/$AFTER" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Send deployment email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_HOST }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: ${{ steps.summary.outputs.subject }}
+          body: ${{ steps.summary.outputs.body }}
+          to: ${{ env.RECIPIENTS }}
+          from: ${{ secrets.EMAIL_FROM }}
+          secure: true
