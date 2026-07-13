@@ -90,6 +90,32 @@ jobs:
         with:
           name: dist
           path: dist
+
+      - name: Upload dotfiles and new directories (bypasses FTP action limitations)
+        continue-on-error: true
+        run: |
+          # FTP-Deploy-Action skips dotfiles in its file scan,
+          # and may not create new directories properly.
+          # Use curl directly for these cases.
+
+          # .htaccess — dotfile, skipped by the action
+          curl -T "dist/.htaccess" "ftp://${{ secrets.FTP_HOST }}/.htaccess" \
+            --user "${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }}" \
+            --ftp-create-dirs \
+            --ssl-reqd --insecure || true
+
+          # .nojekyll — dotfile
+          curl -T "dist/.nojekyll" "ftp://${{ secrets.FTP_HOST }}/.nojekyll" \
+            --user "${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }}" \
+            --ftp-create-dirs \
+            --ssl-reqd --insecure || true
+
+          # privacy/index.html — new directory, not created by the action
+          curl -T "dist/privacy/index.html" "ftp://${{ secrets.FTP_HOST }}/privacy/index.html" \
+            --user "${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }}" \
+            --ftp-create-dirs \
+            --ssl-reqd --insecure || true
+
       - name: Deploy to Hostinger
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
