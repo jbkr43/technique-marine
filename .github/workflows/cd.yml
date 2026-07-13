@@ -95,46 +95,68 @@ jobs:
       - run: npm ci
       - run: npm run build
 
-      - name: Install lftp
-        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends lftp ca-certificates
+      - name: Resolve deployment target
+        id: deploy-target
+        env:
+          FTP_REMOTE_DIR: ${{ secrets.FTP_REMOTE_DIR }}
+        run: |
+          REMOTE_DIR="${FTP_REMOTE_DIR:-/}"
+          REMOTE_DIR="${REMOTE_DIR#/}"
+          REMOTE_DIR="${REMOTE_DIR%/}"
+
+          if [ -z "$REMOTE_DIR" ]; then
+            echo "server_dir=/" >> "$GITHUB_OUTPUT"
+          else
+            echo "server_dir=/${REMOTE_DIR}/" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Upload dotfiles and new directories (bypasses FTP action limitations)
+        continue-on-error: true
+        env:
+          FTP_REMOTE_DIR: ${{ secrets.FTP_REMOTE_DIR }}
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          REMOTE_DIR="${FTP_REMOTE_DIR:-/}"
+          REMOTE_DIR="${REMOTE_DIR#/}"
+          REMOTE_DIR="${REMOTE_DIR%/}"
+
+          if [ -z "$REMOTE_DIR" ]; then
+            TARGET_BASE="ftp://$FTP_HOST/"
+          else
+            TARGET_BASE="ftp://$FTP_HOST/$REMOTE_DIR/"
+          fi
+
+          if [ -f "dist/.htaccess" ]; then
+            curl -T "dist/.htaccess" "${TARGET_BASE}.htaccess" \
+              --user "$FTP_USERNAME:$FTP_PASSWORD" \
+              --ftp-create-dirs \
+              --ssl-reqd --insecure || true
+          fi
+
+          if [ -f "dist/.nojekyll" ]; then
+            curl -T "dist/.nojekyll" "${TARGET_BASE}.nojekyll" \
+              --user "$FTP_USERNAME:$FTP_PASSWORD" \
+              --ftp-create-dirs \
+              --ssl-reqd --insecure || true
+          fi
+
+          if [ -f "dist/privacy/index.html" ]; then
+            curl -T "dist/privacy/index.html" "${TARGET_BASE}privacy/index.html" \
+              --user "$FTP_USERNAME:$FTP_PASSWORD" \
+              --ftp-create-dirs \
+              --ssl-reqd --insecure || true
+          fi
 
       - name: Deploy to Hostinger
-        run: |
-          echo "=== Listing FTP root ==="
-          lftp -c "
-            set ftp:ssl-allow true
-            set ssl:verify-certificate false
-            set ftp:passive-mode true
-            set net:timeout 30
-            open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_HOST }}
-            pwd
-            ls -la
-          " 2>&1
-
-          echo "=== Deploying to web root ==="
-          # Try common Hostinger web root paths
-          for REMOTE_DIR in "files/public_html" "domains/techniquemarine.com/public_html" "public_html"; do
-            if lftp -c "
-              set ftp:ssl-allow true
-              set ssl:verify-certificate false
-              set ftp:passive-mode true
-              set net:timeout 30
-              open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_HOST }}
-              try { cd $REMOTE_DIR; echo 'Found: $REMOTE_DIR'; ls; exit 0 } catch { echo 'Not found'; exit 1 }
-            " 2>&1; then
-              echo "Deploying to: $REMOTE_DIR"
-              lftp -c "
-                set ftp:ssl-allow true
-                set ssl:verify-certificate false
-                set ftp:passive-mode true
-                set net:timeout 120
-                open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_HOST }}
-                cd $REMOTE_DIR
-                mirror -R -v dist/ ./
-              "
-              break
-            fi
-          done
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: dist/
+          server-dir: ${{ steps.deploy-target.outputs.server_dir }}
 
   notify:
     needs: deploy

@@ -29,6 +29,7 @@ Required in GitHub repo settings (`Settings → Secrets and variables → Action
 | `FTP_HOST` | Hostinger FTP server (IP or hostname) |
 | `FTP_USERNAME` | Hostinger FTP login |
 | `FTP_PASSWORD` | Hostinger FTP password |
+| `FTP_REMOTE_DIR` | Optional Hostinger web root path (defaults to `public_html`) |
 
 ## Tech Stack
 
