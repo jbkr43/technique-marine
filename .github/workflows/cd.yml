@@ -106,6 +106,7 @@ jobs:
             set ftp:passive-mode true
             set net:timeout 120
             open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_HOST }}
+            cd public_html
             mirror -R -v dist/ ./
           "
 
