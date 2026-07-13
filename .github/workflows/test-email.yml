@@ -7,6 +7,11 @@ on:
         description: 'Optional comma-separated recipient list (overrides EMAIL_TO secret)'
         required: false
         default: ''
+  push:
+    branches:
+      - 1-implement-google-analytics-to-site
+    paths:
+      - '.github/workflows/test-email.yml'
 
 jobs:
   send-test-email:
