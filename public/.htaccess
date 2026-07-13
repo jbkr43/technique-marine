@@ -5,12 +5,16 @@ RewriteEngine On
 # Custom 404
 ErrorDocument 404 /404.html
 
-# Serve existing files or directories directly
+# Serve existing files directly
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule ^ - [L]
 
-# Serve index.html for subdirectory paths
+# Serve index.html for subdirectory paths (existing directories)
 RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.+)/?$ /$1/index.html [L]
+
+# Fallback: rewrite clean URLs (no file extension) to subdirectory index
+RewriteCond %{REQUEST_URI} !\.[a-zA-Z0-9]{2,6}$
 RewriteRule ^(.+)/?$ /$1/index.html [L]
 
 # Cache static assets
