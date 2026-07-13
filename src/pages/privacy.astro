@@ -1,0 +1,70 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Privacy Policy | Technique Marine" noindex={true}>
+  <main class="privacy" id="main">
+    <div class="privacy__inner">
+      <h1>Privacy Policy</h1>
+      <p class="privacy__updated">Last updated: July 2026</p>
+
+      <p>We respect your privacy. Here is what you should know:</p>
+
+      <h2>Information We Collect</h2>
+      <p><strong>Contact form.</strong> When you submit a form, we collect your name, email, phone, boat type, and message. This is used only to respond to your inquiry.</p>
+      <p><strong>Analytics.</strong> If you consent, Google Analytics collects anonymized data about how the site is used (pages visited, time on site, browser type). No personal information is sent to Google.</p>
+
+      <h2>Cookies</h2>
+      <p>Google Analytics uses cookies only if you accept via the consent banner. We do not set any other cookies.</p>
+
+      <h2>Contact</h2>
+      <p>Technique Marine<br>dylan@techniquemarine.com<br>(910) 465-1175</p>
+    </div>
+  </main>
+
+  <style>
+    .privacy {
+      padding: 80px 24px;
+      background-color: var(--color-cream);
+      color: var(--color-navy);
+    }
+
+    .privacy__inner {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .privacy h1 {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .privacy__updated {
+      font-size: 0.85rem;
+      color: var(--color-steel);
+      margin-bottom: 36px;
+    }
+
+    .privacy h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-top: 32px;
+      margin-bottom: 12px;
+    }
+
+    .privacy p {
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .privacy a {
+      color: var(--color-gold);
+      font-weight: 600;
+    }
+    .privacy a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</Layout>
