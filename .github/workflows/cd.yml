@@ -110,6 +110,22 @@ jobs:
             echo "server_dir=/${REMOTE_DIR}/" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Upload hidden files (dotfiles skipped by FTP-Deploy-Action)
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          SERVER_DIR: ${{ steps.deploy-target.outputs.server_dir }}
+        run: |
+          for f in dist/.*; do
+            [ -f "$f" ] || continue
+            rel="${f#dist/}"
+            curl -T "$f" "ftp://$FTP_HOST${SERVER_DIR}$rel" \
+              --user "$FTP_USERNAME:$FTP_PASSWORD" \
+              --ftp-create-dirs \
+              --ssl --connect-timeout 15 --max-time 30 || echo "Warning: $rel upload failed (ignored)"
+          done
+
       - name: Deploy to Hostinger
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -118,7 +134,6 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: dist/
           server-dir: ${{ steps.deploy-target.outputs.server_dir }}
-          include-hidden-files: true
 
   notify:
     needs: deploy
