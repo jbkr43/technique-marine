@@ -100,18 +100,41 @@ jobs:
 
       - name: Deploy to Hostinger
         run: |
+          echo "=== Listing FTP root ==="
           lftp -c "
             set ftp:ssl-allow true
             set ssl:verify-certificate false
             set ftp:passive-mode true
-            set net:timeout 120
+            set net:timeout 30
             open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_HOST }}
             pwd
-            ls
-            cd files/public_html
-            pwd
-            mirror -R -v dist/ ./
-          "
+            ls -la
+          " 2>&1
+
+          echo "=== Deploying to web root ==="
+          # Try common Hostinger web root paths
+          for REMOTE_DIR in "files/public_html" "domains/techniquemarine.com/public_html" "public_html"; do
+            if lftp -c "
+              set ftp:ssl-allow true
+              set ssl:verify-certificate false
+              set ftp:passive-mode true
+              set net:timeout 30
+              open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_HOST }}
+              try { cd $REMOTE_DIR; echo 'Found: $REMOTE_DIR'; ls; exit 0 } catch { echo 'Not found'; exit 1 }
+            " 2>&1; then
+              echo "Deploying to: $REMOTE_DIR"
+              lftp -c "
+                set ftp:ssl-allow true
+                set ssl:verify-certificate false
+                set ftp:passive-mode true
+                set net:timeout 120
+                open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_HOST }}
+                cd $REMOTE_DIR
+                mirror -R -v dist/ ./
+              "
+              break
+            fi
+          done
 
   notify:
     needs: deploy
