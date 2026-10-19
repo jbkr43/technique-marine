@@ -1,6 +1,7 @@
 ---
 import site from '../content/site.json';
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const showEmployeePortal = import.meta.env.DEV || import.meta.env.PUBLIC_DEMO_MODE === 'true';
 ---
 
 <header class="navbar">
@@ -14,6 +15,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       <a href="#testimonials" class="navbar__link">Testimonials</a>
     </nav>
     <a href="#contact" class="btn navbar__cta">Let's Connect</a>
+    {showEmployeePortal && <a href={site.employeePortalUrl} class="navbar__portal" target="_blank" rel="noopener noreferrer">Employee Portal</a>}
     <button class="navbar__hamburger" aria-label="Open menu" aria-expanded="false">
       <span></span>
       <span></span>
@@ -25,6 +27,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     <a href="#services">Services</a>
     <a href="#about">About</a>
     <a href="#testimonials">Testimonials</a>
+    {showEmployeePortal && <a href={site.employeePortalUrl} target="_blank" rel="noopener noreferrer">Employee Portal</a>}
     <a href="#contact" class="btn">Let's Connect</a>
   </div>
 </header>
@@ -94,6 +97,24 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   .navbar__cta {
     margin-left: 16px;
     white-space: nowrap;
+  }
+
+  .navbar__portal {
+    color: var(--color-gold);
+    border: 1px solid var(--color-gold);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: color 0.2s, background-color 0.2s;
+  }
+
+  .navbar__portal:hover {
+    color: var(--color-navy);
+    background-color: var(--color-gold);
   }
 
   .navbar__hamburger {
@@ -175,6 +196,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     }
 
     .navbar__links,
+    .navbar__portal,
     .navbar__cta {
       display: none;
     }

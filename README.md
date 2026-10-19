@@ -17,6 +17,7 @@ Mobile marine service, maintenance, electronics, and delivery captain serving Ca
 
 - **Every push** — Build + smoke tests (CI)
 - **Merge to `main`** — Build + smoke + full tests → Deploy to Hostinger + test report to GitHub Pages
+- **Push to `demo`** — Build with the Employee Portal button enabled → Deploy to the `demo` subdomain only
 
 Branch protection on `main` enforces CI passing before merge.
 
@@ -30,6 +31,7 @@ Required in GitHub repo settings (`Settings → Secrets and variables → Action
 | `FTP_USERNAME` | Hostinger FTP login |
 | `FTP_PASSWORD` | Hostinger FTP password |
 | `FTP_REMOTE_DIR` | Optional Hostinger web root path (defaults to `public_html`) |
+| `FTP_DEMO_REMOTE_DIR` | Required Hostinger document root for `demo.techniquemarine.com`; must be separate from production |
 
 ## Tech Stack
 

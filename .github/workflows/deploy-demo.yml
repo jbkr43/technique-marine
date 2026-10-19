@@ -1,0 +1,45 @@
+name: Deploy Demo
+
+on:
+  push:
+    branches: [demo]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Build demo site
+        run: npm run build
+        env:
+          PUBLIC_DEMO_MODE: 'true'
+          SITE_URL: https://demo.techniquemarine.com
+      - name: Verify demo deployment directory is configured
+        id: deploy-target
+        env:
+          FTP_DEMO_REMOTE_DIR: ${{ secrets.FTP_DEMO_REMOTE_DIR }}
+        run: |
+          if [ -z "$FTP_DEMO_REMOTE_DIR" ]; then
+            echo "FTP_DEMO_REMOTE_DIR must point to the demo subdomain's document root." >&2
+            exit 1
+          fi
+          REMOTE_DIR="${FTP_DEMO_REMOTE_DIR#/}"
+          REMOTE_DIR="${REMOTE_DIR%/}"
+          echo "server_dir=/${REMOTE_DIR}/" >> "$GITHUB_OUTPUT"
+      - name: Deploy demo to Hostinger
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: dist/
+          server-dir: ${{ steps.deploy-target.outputs.server_dir }}
